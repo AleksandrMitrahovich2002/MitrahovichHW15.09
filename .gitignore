@@ -1,0 +1,66 @@
+# Default .gitignore для Maven проекта
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Скомпилированные классы
+*.class
+
+# Архивы
+*.zip
+*.tar.gz
+*.war
+*.ear
+
+# Логи
+*.log
+
+# Файлы IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Example – комментарий из-за #
+.idea/replstate.xml
+
+# Не отслеживать папку temp
+temp/
+
+# Не отслеживать папку dataSources в папке .idea
+.idea/**/dataSources/
+
+# Файлы операционных систем
+.DS_Store
+Thumbs.db
+
+# Файлы окружения
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Файлы кэша Maven
+.m2/repository/
+
+# Файлы проверок (checkstyle, spotbugs и т.д.)
+checkstyle-result.xml
+spotbugsXml.xml
+
+# Файлы покрытия тестов
+jacoco.exec
+*.exec
+
+# Файлы конфигурации
+/.settings/
+/.classpath
+/.project
+/.factorypath

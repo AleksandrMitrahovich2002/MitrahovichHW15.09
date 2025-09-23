@@ -2,11 +2,23 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.refresh;
 
 public class ProjectPage extends BasePage {
 
-    private final SelenideElement issuesCounter = findElementByXpath("//span[contains(@class, 'results-count-total')]");
+    private final SelenideElement issuesCounter = findElementByXpath("//*[@id='main']/div/div/div/div/div/div/div[2]/div[2]/div/div[1]/div/div[1]/span");
     private final SelenideElement issueTestSelenium = findElementByXpath("//a[text()='TestSeleniumATHomework']");
+    private final SelenideElement createTaskSelenium = findElementByXpath("//*[@id=\"create_link\"]");
+    private final SelenideElement confirmCreationTaskSelenium = findElementByXpath("//*[@id=\"create-issue-submit\"]");
+    private final SelenideElement topicInput = findElementByXpath("//*[@id=\"summary\"]");
+
+    public void createTask() {
+        createTaskSelenium.shouldBe(visible).click();
+        topicInput.shouldBe(visible).setValue("Some topic name");
+        confirmCreationTaskSelenium.shouldBe(visible).click();
+        refresh();
+    }
 
     // Класс-обертка для работы со счетчиком задач
     public static class IssuesCounter {
@@ -38,8 +50,8 @@ public class ProjectPage extends BasePage {
     }
 
     public void openIssueTestSelenium() {
-        issueTestSelenium.shouldBe(visible).click();
-        waitForUrlToContain("/browse/TEST-");
+        open("https://edujira.ifellow.ru/browse/TEST-121544");
+        waitForUrlToContain("/browse/TEST-121544");
     }
 
     public void verifyIssuesCounter(IssuesCounter expectedCounter) {

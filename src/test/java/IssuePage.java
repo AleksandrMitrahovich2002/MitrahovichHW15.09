@@ -19,6 +19,6 @@ public class IssuePage extends BasePage {
 
     public void clickCreateIssue() {
         createIssueButton.shouldBe(visible).click();
-        waitForUrlToContain("/CreateIssue!default.jspa");
+        waitForUrlToContain("https://edujira.ifellow.ru/browse/TEST-121544");
     }
 }

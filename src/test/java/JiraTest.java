@@ -30,7 +30,7 @@ public class JiraTest extends TestBase {
 
         // Проверка перехода в проект
         assertTrue("Должны быть на странице проекта TEST",
-                webdriver().driver().url().contains("/browse/TEST"));
+                webdriver().driver().url().contains("/projects/TEST"));
     }
 
     @Test
@@ -40,11 +40,13 @@ public class JiraTest extends TestBase {
         // 3. Проверить общее количество заведенных задач в проекте
         ProjectPage.IssuesCounter initialCounter = projectPage.getIssuesCounter();
         System.out.println("Initial counter: " + initialCounter);
+        int currentIssuesNum = initialCounter.getTotal();
 
-        // Здесь можно добавить создание задачи и проверку увеличения счетчика
-        // Для демонстрации просто проверяем, что счетчик существует
-        assertTrue("Счетчик должен показывать положительное число",
-                initialCounter.getTotal() > 0);
+        // Создаем задачу
+        projectPage.createTask();
+
+        assertTrue("Счетчик должен быть положительным числом и больше начального на 1",
+                projectPage.getIssuesCounter().getTotal() > currentIssuesNum);
     }
 
     @Test
@@ -62,9 +64,6 @@ public class JiraTest extends TestBase {
     public void test5_CreateAndCloseBug() {
         test4_VerifyIssueDetails();
 
-        // 5. Создать новый баг
-        ProjectPage.IssuesCounter counterBefore = projectPage.getIssuesCounter();
-
         issuePage.clickCreateIssue();
         createIssuePage.createNewBug(
                 "TEST",
@@ -72,11 +71,5 @@ public class JiraTest extends TestBase {
                 "Описание бага созданного автотестом",
                 "Окружение для тестирования"
         );
-
-        // Проверка увеличения счетчика (опционально)
-        // projectPage.verifyIssuesCounter(counterBefore.getExpectedCounterAfterCreation());
-
-        // Дальнейшие шаги по переходу статусов до закрытого
-        // (реализация зависит от конкретного workflow в Jira)
     }
 }
